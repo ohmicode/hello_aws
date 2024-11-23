@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     kotlin("jvm") version "2.0.21"
     id("org.jetbrains.kotlin.plugin.spring") version "2.0.21"
@@ -23,12 +21,15 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks.test {
-    useJUnitPlatform()
+kotlin {
+    compilerOptions {
+        apiVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0)
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+    }
 }
 
-tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "17"
+tasks.test {
+    useJUnitPlatform()
 }
 
 application {
